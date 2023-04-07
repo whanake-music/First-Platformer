@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6d7pmc0l5eeh"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_bpcfc"]
+[ext_resource type="Texture2D" uid="uid://bh1au5qqs4q71" path="res://art/Character.png" id="2_oiosl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h6bje"]
+radius = 7.0
+height = 32.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycll4"]
+atlas = ExtResource("2_oiosl")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro1kr"]
+atlas = ExtResource("2_oiosl")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nim8"]
+atlas = ExtResource("2_oiosl")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqmis"]
+atlas = ExtResource("2_oiosl")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk25l"]
+atlas = ExtResource("2_oiosl")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m1tjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycll4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ro1kr")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5nim8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqmis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk25l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqmis")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_bpcfc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_h6bje")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_m1tjh")
+animation = &"jump"
+frame_progress = 0.995948
+
+[node name="Camera2D" type="Camera2D" parent="."]
